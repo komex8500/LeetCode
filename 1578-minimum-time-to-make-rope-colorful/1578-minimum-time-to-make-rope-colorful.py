@@ -3,18 +3,17 @@ class Solution:
         n = len(colors)
         if n < 3:
             return 0
-        dp = [0] * n
-        stack = [0]
-        for i in range(1, n):
-            if colors[stack[-1]] != colors[i]:
-                stack.append(i)
-                dp[i] = dp[i-1]
-            else:
-                if neededTime[stack[-1]] > neededTime[i]:
-                    dp[i] = dp[i-1] + neededTime[i]
+        result = 0
+        i = 0
+        j = 1
+        while i < n and j < n:
+            if colors[i] == colors[j]:
+                if neededTime[i] > neededTime[j]:
+                    result += neededTime[j]
                 else:
-                    rm = stack.pop()
-                    stack.append(i)
-                    dp[i] = dp[i-1] + neededTime[rm]
-
-        return dp[-1]
+                    result += neededTime[i]
+                    i = j
+            else:
+                i = j
+            j += 1
+        return result
