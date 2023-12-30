@@ -1,7 +1,13 @@
 class Solution:
     def makeEqual(self, words: List[str]) -> bool:
-        s = ("").join(words)
-        for c in s:
-            if s.count(c) % len(words) != 0:
+        d = dict()
+        for word in words:
+            for c in word:
+                if c in d:
+                    d[c] += 1
+                else:
+                    d[c] = 1
+        for count in list(d.values()):
+            if count % len(words) != 0:
                 return False
         return True
