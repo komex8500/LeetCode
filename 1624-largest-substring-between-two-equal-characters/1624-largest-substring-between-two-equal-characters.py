@@ -1,7 +1,10 @@
 class Solution:
     def maxLengthBetweenEqualCharacters(self, s: str) -> int:
         result = -1
-        for i in range(len(s) - 1, len(s)//2 - 1, -1):
-            index = s.find(s[i])
-            result = max(result, (i - index - 1))
+        d = dict()
+        for i in range(len(s)):
+            if s[i] in d:
+                result = max(result, i - d[s[i]] - 1)
+            else:
+                d[s[i]] = i
         return result
