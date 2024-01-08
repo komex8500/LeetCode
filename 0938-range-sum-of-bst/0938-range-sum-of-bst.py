@@ -13,10 +13,15 @@ class Solution:
         cur = root
         while cur or stack:
             if cur:
-                stack.append(cur)
-                cur = cur.left
+                if cur.val < low:
+                    cur = cur.right
+                else:
+                    stack.append(cur)
+                    cur = cur.left
             else:
                 cur = stack.pop()
+                if cur.val > high:
+                    break
                 if cur.val >= low and cur.val <= high:
                     result += cur.val
                 cur = cur.right
