@@ -6,18 +6,23 @@
 #         self.right = right
 class Solution:
     def leafSimilar(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
-        def collect_leaf_values(root, leaf_values):
-            if not root:
-                return
-            if not root.left and not root.right:
-                leaf_values.append(root.val)
-            collect_leaf_values(root.left, leaf_values)
-            collect_leaf_values(root.right, leaf_values)
+        def getLeafValueSequence(root) -> List[int]:
+            result = []
+            st = []
+            if root:
+                st.append(root)
+            while st:
+                cur = st.pop()
+                if cur != None:
+                    if cur.right == None and cur.left == None:
+                        result.append(cur.val)
+                        continue
+                    if cur.right:
+                        st.append(cur.right)
+                    if cur.left:
+                        st.append(cur.left)
+            return result
 
-        leaf_values1 = []
-        leaf_values2 = []
-
-        collect_leaf_values(root1, leaf_values1)
-        collect_leaf_values(root2, leaf_values2)
-
-        return leaf_values1 == leaf_values2
+        r1 = getLeafValueSequence(root1)
+        r2 = getLeafValueSequence(root2)
+        return r1 == r2
