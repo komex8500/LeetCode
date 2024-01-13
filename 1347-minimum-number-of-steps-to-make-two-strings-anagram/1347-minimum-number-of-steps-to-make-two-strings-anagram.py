@@ -1,12 +1,11 @@
 class Solution:
     def minSteps(self, s: str, t: str) -> int:
         s_list = [0] * 26
+        t_list = [0] * 26
         result = 0
-        for c in s:
-            s_list[ord(c) - ord('a')] += 1
-        for c in t:
-            if s_list[ord(c) - ord('a')] > 0:
-                s_list[ord(c) - ord('a')] -= 1
-            else:
-                result += 1
-        return result
+        for i in range(len(s)):
+            s_list[ord(s[i]) - ord('a')] += 1
+            t_list[ord(t[i]) - ord('a')] += 1
+        for i in range(26):
+            result += abs(s_list[i] - t_list[i])
+        return result // 2
