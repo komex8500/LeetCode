@@ -1,6 +1,3 @@
-from typing import *
-
-
 class Solution:
     def imageSmoother(self, img: List[List[int]]) -> List[List[int]]:
         l1 = len(img)
