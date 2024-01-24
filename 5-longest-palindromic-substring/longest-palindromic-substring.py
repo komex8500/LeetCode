@@ -1,20 +1,19 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        if len(s) <= 1:
+        n = len(s)
+        if n < 2:
             return s
 
-        Max_Len = 1
-        Max_Str = s[0]
-        dp = [[False for _ in range(len(s))] for _ in range(len(s))]
-        for i in range(len(s)):
-            dp[i][i] = True
-            for j in range(i):
-                if s[j] == s[i] and (i-j <= 2 or dp[j+1][i-1]):
-                    dp[j][i] = True
-                    if i-j+1 > Max_Len:
-                        Max_Len = i-j+1
-                        Max_Str = s[j:i+1]
-        return Max_Str
+        max_len = 1
+        begin = 0
 
-
-                
+        dp = [[False] * n for _ in range(n)]
+        for k in range(n):
+            dp[k][k] = True
+            for j in range(k):
+                if (k-j < 2 or dp[j+1][k-1]) and s[j] == s[k]:
+                    dp[j][k] = True
+                    if k-j+1 > max_len:
+                        max_len = k-j+1
+                        begin = j
+        return s[begin:begin+max_len] 
