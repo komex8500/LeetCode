@@ -4,6 +4,10 @@ class Solution:
         return self.check_happy(n, s)
 
     def check_happy(self, n, s):
+        if n == 1:
+            return True
+        if n in s:
+            return False
         l = []
         new = 0
         s.add(n)
@@ -11,8 +15,4 @@ class Solution:
             l.append(c)
         for i in range(len(l)):
             new += int(l[i]) ** 2
-        if new == 1:
-            return True
-        if new in s:
-            return False
         return self.check_happy(new, s)
