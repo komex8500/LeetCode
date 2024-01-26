@@ -12,4 +12,3 @@ class Solution:
             else:
                 d[c] -= 1
         return True
-
